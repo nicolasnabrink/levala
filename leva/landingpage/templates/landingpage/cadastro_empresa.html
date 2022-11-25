@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Cadastro de empresa!</h1>
+<p>Para solicitar o cadastro da sua empresa é so preencher os dados abaixos!</p>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-success">Publicar</button>
+
+{% endblock content %}

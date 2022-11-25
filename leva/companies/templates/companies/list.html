@@ -9,7 +9,7 @@
 <section class="lista-de-cards">
     {% for company in company_list %}
     <article class="card">
-        <a href="{% url 'companies:detail' company.id %}"></a>
+        <a href="{% url 'companies:detail' company.id %}">{{company.user_id.name}}</a>
         <p>{{ company.cnpj }} ({{ company.city }})</p>
     </article>
     {% endfor %}

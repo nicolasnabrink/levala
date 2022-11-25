@@ -11,6 +11,8 @@ class User(models.Model):
         return f'{self.name} - {self.email}'
 
 class Company(models.Model):
+
+    logoURL = models.URLField(max_length=300, null=True, blank=True)
     cnpj = models.IntegerField(default=0)
     tel = models.IntegerField(default=0)
     job = models.CharField(max_length=255, default='Municipal')

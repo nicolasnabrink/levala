@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{company.user_id.name}}
+{% endblock title %}
+
+{% block content %}
+<h2>{{company.user_id.name}}</h2>
+
+<section class="dados-de-filme">
+    <ul class="infos">
+        <li><h3>infos:</h3></li>
+        <li>Cnpj: {{ company.cnpj }}</li>
+        <li>Tel: {{ company.tel }}</li>
+        <li>Job: {{ company.job }}</li>
+        <li>City: {{ company.city }}</li>
+        <li>Score: {{ company.score }}</li>
+    </ul>
+</section>
+
+{% endblock content %}
