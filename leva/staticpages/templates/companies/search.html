@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Filtro de Empresas por Nome</h2>
+<form action="{% url 'companies:search' %}">
+    <p>
+        <label for="id_query">Título:</label>
+        <input type="text" name="query" id="id_query" />
+    </p>
+    <button type="submit">Buscar</button>
+</form>
+
+
+<h2>Resultado do Filtro</h2>
+{% if company_list %}
+<section class="lista-de-cards">
+    {% for company in company_list %}
+    <article class="card">
+        <p>{{ company.cnpj }} ({{ company.city }})</p>
+    </article>
+    {% endfor %}
+</section>
+{% else %}
+<p>Não foi encontrado nenhuma empresa.</p>
+{% endif %}
+
+{% endblock content %}

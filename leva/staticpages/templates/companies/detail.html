@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ company.cnpj }} ({{ company.city }}
+{% endblock title %}
+
+{% block content %}
+<h2>Detalhes da Empresa {{ company.cnpj }} ({{ company.city }})</h2>
+
+<section class="dados-de-filme">
+    <ul>
+        <li>Cnpj: {{ company.cnpj }}</li>
+        <li>Cidade: {{ company.city }} </li>
+    </ul>
+</section>
+
+{% endblock content %}
