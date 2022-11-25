@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from .models import Company
 from django.shortcuts import render, get_object_or_404
 
-# Create your views here.
+# Create your views here
+
 def detail_company(request, company_id):
     company = get_object_or_404(Company, pk=company_id)
     context = {'company': company}
@@ -12,7 +13,7 @@ def detail_company(request, company_id):
 def list_companies(request):
     company_list = Company.objects.all()
     context = {'company_list': company_list}
-    return render(request, 'companies/index.html', context)
+    return render(request, 'companies/list.html', context)
 
 def search_companies(request):
     context = {}

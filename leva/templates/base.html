@@ -18,9 +18,9 @@
     <header id="cabecalho-principal">
         <a href="{% url 'index' %}"> <img src="{% static 'logo.png' %}" width="100"> </a>
         <nav id="navegacao-principal">
-            <ul>
-                
-                <li><a href="{% url 'companies:index' %}">Busca</a></li>
+            <ul><li><a href="{% url 'companies:list' %}">Cadastre-se</a>
+                <li><a href="{% url 'companies:list' %}">Logar</a></li>
+                <li><a href="{% url 'companies:list' %}">Buscar empresas</a></li>
             </ul>
         </nav>
 
