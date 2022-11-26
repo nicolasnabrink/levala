@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Company
+from user.models import Company
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here
