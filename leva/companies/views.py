@@ -5,8 +5,8 @@ from django.shortcuts import render, get_object_or_404
 
 # Create your views here
 
-def detail_company(request, company_id):
-    company = get_object_or_404(Company, pk=company_id)
+def detail_company(request, user_id):
+    company = get_object_or_404(Company, user_id=user_id)
     context = {'company': company}
     return render(request, 'companies/detail.html', context)
 

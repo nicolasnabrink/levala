@@ -1,30 +1,52 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-from user.forms import ClientForm, CompanyForm
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, logout,authenticate
+from django.shortcuts import redirect, render
+from django.contrib import messages
+from django.views.generic import CreateView
+from .forms import ClientSignUpForm, CompanySignUpForm
+from django.contrib.auth.forms import AuthenticationForm
+from .models import User
+
+def register(request):
+    return render(request, 'user/register.html')
+
+class customer_register(CreateView):
+    model = User
+    form_class = ClientSignUpForm
+    template_name = 'user/client_register.html'
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('/')
+
+class employee_register(CreateView):
+    model = User
+    form_class = CompanySignUpForm
+    template_name = 'user/company_register.html'
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('/')
 
 
-def signup_client(request):
-    if request.method == 'POST':
-        form = ClientForm(request.POST)
+def login_request(request):
+    if request.method=='POST':
+        form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('index'))
-    else:
-        form = ClientForm()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None :
+                login(request,user)
+                return redirect('/')
+            else:
+                messages.error(request,"Invalid username or password")
+        else:
+                messages.error(request,"Invalid username or password")
+    return render(request, 'user/login.html',
+    context={'form':AuthenticationForm()})
 
-    context = {'form': form}
-    return render(request, 'signup.html', context)
-
-def signup_company(request):
-    if request.method == 'POST':
-        form = CompanyForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('index'))
-    else:
-        form = CompanyForm()
-
-    context = {'form': form}
-    return render(request, 'signup.html', context)
+def logout_view(request):
+    logout(request)
+    return redirect('index')

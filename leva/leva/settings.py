@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'companies.apps.CompaniesConfig',
     'landingpage.apps.LandingpageConfig',
     'user',
+    'widget_tweaks',
 ]
+
+AUTH_USER_MODEL = 'user.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -127,7 +130,4 @@ STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'), ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = "user.User"
 
-LOGIN_REDIRECT_URL = 'index'
-LOGOUT_REDIRECT_URL = 'index'
