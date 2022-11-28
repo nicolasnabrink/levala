@@ -23,7 +23,7 @@
             <li><a href="{% url 'logout' %}">Logout</a></li>
             <li><a href="{% url 'companies:list' %}">Buscar empresas</a></li>
             {% if user.is_client %}
-            <li><a href="{% url 'profile' %}">Perfil</a></li>
+            <li><a href="{% url 'profile' user.id %}">Perfil</a></li>
             {% else %}
             {% endif %}
             {% else %}

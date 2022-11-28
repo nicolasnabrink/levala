@@ -1,6 +1,7 @@
 from django.contrib.auth import login, logout,authenticate
 from django.shortcuts import redirect, render
 from django.contrib import messages
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import CreateView
 from .forms import ClientSignUpForm, CompanySignUpForm
 from django.contrib.auth.forms import AuthenticationForm

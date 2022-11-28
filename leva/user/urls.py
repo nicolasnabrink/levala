@@ -7,6 +7,6 @@ urlpatterns=[
      path('company_register/',views.employee_register.as_view(), name='company_register'),
      path('login/',views.login_request, name='login'),
      path('logout/',views.logout_view, name='logout'),
-     path('profile/',views.profile_client, name='profile'),
+     path('<int:user_id>/',views.profile_client, name='profile'),
      path('alter-data/',views.alter_data, name='alter_data'),
 ]
