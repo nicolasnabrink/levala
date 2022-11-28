@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{client.user.name}}
+{% endblock title %}
+
+{% block content %}
+<h2>{{client.user.name}}</h2>
+
+<section>
+    <ul>
+        <li><h3>Dados pessoais:</h3></li>
+        <li>Nome: {{ client.name }}</li>
+        <li>CPF: {{ client.cpf }}</li>
+        <li>Tel: {{ client.tel }}</li>
+        <li>City: {{ client.city }}</li>
+    </ul>
+</section>
+<section>
+    
+</section>
+
+{% endblock content %}

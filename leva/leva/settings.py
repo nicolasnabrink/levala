@@ -40,7 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'companies.apps.CompaniesConfig',
     'landingpage.apps.LandingpageConfig',
+    'user',
+    'widget_tweaks',
 ]
+
+AUTH_USER_MODEL = 'user.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -125,3 +129,5 @@ STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'), ]
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
