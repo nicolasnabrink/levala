@@ -22,6 +22,10 @@
             <li>Bem vindo {{ user.name }}</li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
             <li><a href="{% url 'companies:list' %}">Buscar empresas</a></li>
+            {% if user.is_client %}
+            <li><a href="{% url 'profile' %}">Perfil</a></li>
+            {% else %}
+            {% endif %}
             {% else %}
             <li><a href="{% url 'register' %}">Register</a></li>
             <li><a href="{% url 'login' %}">Login</a> </li>

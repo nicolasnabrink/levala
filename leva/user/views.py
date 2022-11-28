@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.views.generic import CreateView
 from .forms import ClientSignUpForm, CompanySignUpForm
 from django.contrib.auth.forms import AuthenticationForm
-from .models import User
+from .models import User, Client
 
 def register(request):
     return render(request, 'user/register.html')
@@ -50,3 +50,11 @@ def login_request(request):
 def logout_view(request):
     logout(request)
     return redirect('index')
+
+def profile_client(request, user_id):
+    client = get_object_or_404(Client, user_id=user_id)
+    context = {'client': client}
+    return render(request, 'user/profile.html', context)
+
+def alter_data(request):
+    return render(request, 'user/alter-data.html')
