@@ -17,4 +17,10 @@
     </ul>
 </section>
 
+<section>
+    {% if self.company.cnpj == company.cnpj %}
+    <button><a href="{% url 'update_profile' user.id %}">Altere seu perfil</a></button>
+    {% endif %}
+</section>
+
 {% endblock content %}
