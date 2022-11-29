@@ -57,5 +57,17 @@ def profile_client(request, user_id):
     context = {'client': client}
     return render(request, 'user/profile.html', context)
 
-def alter_data(request):
-    return render(request, 'user/alter-data.html')
+def update_profile(request):
+    args = {}
+
+    if request.method == 'POST':
+        form = UpdateProfile(request.POST, instance=request.user)
+        form.actual_user = request.user
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('update_profile'))
+    else:
+        form = UpdateProfile()
+
+    args['form'] = form
+    return render(request, 'user/update_profile.html', args)

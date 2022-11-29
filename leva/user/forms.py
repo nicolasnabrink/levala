@@ -50,3 +50,28 @@ class CompanySignUpForm(UserCreationForm):
         company.job=self.cleaned_data.get('job')
         company.save()
         return user
+
+class UpdateProfile(forms.ModelForm):
+    name = forms.CharField(required=True)
+    cpf = forms.CharField(required=True)
+    tel = forms.CharField(required=True)
+    city = forms.CharField(required=True)
+
+    class Meta:
+        model = User
+        fields = '__all__'
+
+    def save(self, commit=True):
+        user = super(ClientSignUpForm, self).save(commit=False)
+        user.is_client = True
+        user.name = self.cleaned_data.get('name')
+        user.save()
+        client.tel=self.cleaned_data.get('tel')
+        client.city=self.cleaned_data.get('city')
+        client.cpf=self.cleaned_data.get('cpf')
+        client.save()
+
+        return user
+
+        
+        
