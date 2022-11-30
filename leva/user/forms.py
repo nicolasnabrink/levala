@@ -51,16 +51,16 @@ class CompanySignUpForm(UserCreationForm):
         company.save()
         return user
 
-class UpdateProfile(forms.ModelForm):
+class UpdateProfileForm(forms.ModelForm):
     name = forms.CharField(required=True)
     cpf = forms.CharField(required=True)
     tel = forms.CharField(required=True)
     city = forms.CharField(required=True)
 
     class Meta:
-        model = User
-        fields = '__all__'
-
+        model = Client
+        fields = ['cpf', 'tel', 'city']
+    @transaction.atomic
     def save(self, commit=True):
         user = super(ClientSignUpForm, self).save(commit=False)
         user.is_client = True

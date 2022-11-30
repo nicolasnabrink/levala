@@ -2,8 +2,9 @@ from django.contrib.auth import login, logout,authenticate
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import CreateView
-from .forms import ClientSignUpForm, CompanySignUpForm
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, UpdateView
+from .forms import ClientSignUpForm, CompanySignUpForm, UpdateProfileForm
 from django.contrib.auth.forms import AuthenticationForm
 from .models import User, Client
 
@@ -57,17 +58,28 @@ def profile_client(request, user_id):
     context = {'client': client}
     return render(request, 'user/profile.html', context)
 
-def update_profile(request):
-    args = {}
+class UpdateProfile(UpdateView):
+    form_class = UpdateProfileForm
+    template_name = 'user/update_profile.html'
+    success_url = reverse_lazy('index')
 
-    if request.method == 'POST':
-        form = UpdateProfile(request.POST, instance=request.user)
-        form.actual_user = request.user
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('update_profile'))
-    else:
-        form = UpdateProfile()
+    def get_object(self):
+        return self.request.user.client
 
-    args['form'] = form
-    return render(request, 'user/update_profile.html', args)
+    
+
+        
+    '''def update_profile(request, user_id):
+        args = {}
+
+        if request.method == 'POST':
+            form = UpdateProfile(request.POST, instance=request.user)
+            form.actual_user = request.user
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect(reverse(''))
+        else:
+            form = UpdateProfile()
+
+        args['form'] = form
+        return render(request, 'user/update_profile.html', args)'''
