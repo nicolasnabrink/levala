@@ -8,5 +8,6 @@ urlpatterns=[
      path('login/',views.login_request, name='login'),
      path('logout/',views.logout_view, name='logout'),
      path('profile/<int:user_id>/',views.profile_client, name='profile'),
-     path('update_profile/<int:user_id>/',views.UpdateProfile.as_view(), name='update_profile'),
+     path('update_client_profile/<int:user_id>/',views.UpdateClientProfile.as_view(), name='update_client_profile'),
+     path('update_company_profile/<int:user_id>/',views.UpdateCompanyProfile.as_view(), name='update_company_profile'),
 ]
