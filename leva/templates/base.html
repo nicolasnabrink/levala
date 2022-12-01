@@ -18,10 +18,20 @@
     <header id="cabecalho-principal">
         <a href="{% url 'index' %}"> <img src="{% static 'logo.png' %}" width="100"> </a>
         <nav id="navegacao-principal">
-            <ul><li><a href="{% url 'companies:list' %}">Cadastre-se</a>
-                <li><a href="{% url 'companies:list' %}">Logar</a></li>
-                <li><a href="{% url 'companies:list' %}">Buscar empresas</a></li>
-            </ul>
+            {% if user.is_authenticated%}
+            <li>Bem vindo {{ user.name }}</li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            <li><a href="{% url 'companies:list' %}">Buscar empresas</a></li>
+            {% if user.is_client %}
+            <li><a href="{% url 'profile' user.id %}">Perfil</a></li>
+            {% else %}
+            <li><a href="{% url 'companies:detail' user.id %}">Perfil</a></li>
+            {% endif %}
+            {% else %}
+            <li><a href="{% url 'register' %}">Register</a></li>
+            <li><a href="{% url 'login' %}">Login</a> </li>
+            <li><a href="{% url 'companies:list' %}">Buscar empresas</a></li>
+            {% endif %}
         </nav>
 
     </header>

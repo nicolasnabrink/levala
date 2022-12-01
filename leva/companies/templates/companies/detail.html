@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block title %}
-{{company.user_id.name}}
+{{company.user.name}}
 {% endblock title %}
 
 {% block content %}
-<h2>{{company.user_id.name}}</h2>
+<h2>{{company.user.name}}</h2>
 
 <section class="dados-de-filme">
     <ul class="infos">
@@ -14,8 +14,13 @@
         <li>Tel: {{ company.tel }}</li>
         <li>Job: {{ company.job }}</li>
         <li>City: {{ company.city }}</li>
-        <li>Score: {{ company.score }}</li>
     </ul>
+</section>
+
+<section>
+    {% if self.company.cnpj == company.cnpj %}
+    <button><a href="{% url 'update_profile' user.id %}">Altere seu perfil</a></button>
+    {% endif %}
 </section>
 
 {% endblock content %}
