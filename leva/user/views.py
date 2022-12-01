@@ -61,7 +61,7 @@ def profile_client(request, user_id):
 class UpdateClientProfile(UpdateView):
     form_class = UpdateClientProfileForm
     template_name = 'user/update_client_profile.html'
-    success_url = reverse_lazy('profile')
+    success_url = reverse_lazy('index')
 
     def get_object(self):
         return self.request.user.client
@@ -69,7 +69,7 @@ class UpdateClientProfile(UpdateView):
 class UpdateCompanyProfile(UpdateView):
     form_class = UpdateCompanyProfileForm
     template_name = 'user/update_company_profile.html'
-    success_url = reverse_lazy('detail')
+    success_url = reverse_lazy('index')
 
     def get_object(self):
         return self.request.user.company

@@ -7,7 +7,7 @@
 
         <h2>Alteração de perfil</h2>
       <div class="card-body">
-          <form action="{% url 'update_company_profile' %}" method="POST" novalidate>
+          <form action="{% url 'update_company_profile' user.id %}" method="POST" novalidate>
             {% csrf_token %}
                 {% for field in form.visible_fields %}
                   <div class="form-group">

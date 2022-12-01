@@ -66,11 +66,10 @@ class UpdateClientProfileForm(forms.ModelForm):
         user.is_client = True
         user.name = self.cleaned_data.get('name')
         user.save()
-        client = Client.objects.create(user=user)
+        client = Client.objects.filter(user=user)
         client.tel=self.cleaned_data.get('tel')
         client.city=self.cleaned_data.get('city')
         client.cpf=self.cleaned_data.get('cpf')
-        client.save()
 
         return user
 
@@ -91,13 +90,12 @@ class UpdateCompanyProfileForm(forms.ModelForm):
         user.is_company = True
         user.name = self.cleaned_data.get('name')
         user.save()
-        company = Company.objects.create(user=user)
+        company = Company.objects.filter(user=user)
         company.tel=self.cleaned_data.get('tel')
         company.logoURL=self.cleaned_data.get('logoURL')
         company.cnpj=self.cleaned_data.get('cnpj')
         company.city=self.cleaned_data.get('city')
         company.job=self.cleaned_data.get('job')
-        company.save()
         return user
         
         
