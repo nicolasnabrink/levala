@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from user.models import Company
+from user.models import Company, Pedido
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here
 
 def detail_company(request, user_id):
     company = get_object_or_404(Company, user_id=user_id)
-    context = {'company': company}
+    pedidos_list = Pedido.objects.filter(company_id=user_id)
+    context = {'company': company, 'pedidos_list': pedidos_list}
     return render(request, 'companies/detail.html', context)
 
 def list_companies(request):

@@ -2,11 +2,12 @@ from django.contrib.auth import login, logout,authenticate
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView
-from .forms import ClientSignUpForm, CompanySignUpForm, UpdateClientProfileForm, UpdateCompanyProfileForm
+from .forms import ClientSignUpForm, CompanySignUpForm, UpdateClientProfileForm, UpdateCompanyProfileForm, PedidoForm
 from django.contrib.auth.forms import AuthenticationForm
-from .models import User, Client, Company 
+from .models import User, Client, Company, Pedido
+from django.http import HttpResponseRedirect
 
 def register(request):
     return render(request, 'user/register.html')
@@ -73,3 +74,21 @@ class UpdateCompanyProfile(UpdateView):
 
     def get_object(self):
         return self.request.user.company
+
+def create_pedido(request, user_id):
+    company = get_object_or_404(Company, pk=user_id)
+    if request.method == 'POST':
+        form = PedidoForm(request.POST)
+        if form.is_valid():
+            pedido_user = request.user
+            pedido_body = form.cleaned_data['body']
+            pedido = Pedido.objects.create(user=pedido_user,
+                            body=pedido_body,
+                            company=company)
+            pedido.save()
+            return HttpResponseRedirect(
+                reverse('companies:detail', args=(user_id, )))
+    else:
+        form = PedidoForm()
+    context = {'form': form, 'company': company}
+    return render(request, 'companies/pedido.html', context)

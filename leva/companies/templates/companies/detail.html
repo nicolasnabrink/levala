@@ -5,9 +5,10 @@
 {% endblock title %}
 
 {% block content %}
-<h2>{{company.user.name}}</h2>
+<h2>{{company.name}}</h2>
 
 <section class="dados-de-filme">
+    <img src={{ company.logoURL }} width="100"> </a>
     <ul class="infos">
         <li><h3>infos:</h3></li>
         <li>Cnpj: {{ company.cnpj }}</li>
@@ -18,8 +19,21 @@
 </section>
 
 <section>
-    {% if user.is_company %}
-    <button><a href="{% url 'companies:update_company_profile' user.id %}">Altere seu perfil</a></button>
+    {% if user.is_authenticated%}
+        {% if user.is_client %}
+        <a href="{% url 'companies:create_pedido' company.user_id %}"><button>Faça seu pedido de orçamento</button></a>
+        {% endif %}
+        {% if user.id == company.user.id %}
+            {% if pedido_list %}
+                <small>Você ainda não recebeu pedidos</small>
+            {% else %}
+            {% for pedido in pedidos_list %}
+                <strong>{{ pedido.user.username }}</strong> <small>-{{ pedido.datetime }} </small>
+                <br>{{ pedido.body }} <br><br>
+            {% endfor %}
+        {% endif %}
+        <button><a href="{% url 'companies:update_company_profile' user.id %}">Altere seu perfil</a></button>
+        {% endif %}
     {% endif %}
 </section>
 

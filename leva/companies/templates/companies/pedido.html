@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h2>Pedido de Orçamento para {{ company.name }} </h2>
+
+
+<form action="{% url 'companies:create_pedido' company.user_id %}" method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Fazer Pedido</button>
+
+</form>
+
+
+<p><a href="{% url 'companies:detail' company.user_id %}">Voltar para a página da empresa</a></p>
+
+{% endblock content %}
