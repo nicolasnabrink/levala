@@ -19,6 +19,7 @@
 </section>
 
 <section>
+    <h2>Avaliações</h2>
     {% if pedidos_list %}
         {% for comment in comments_list %}
             {% for pedido in pedidos_list %}
@@ -44,7 +45,7 @@
         {% endif %}
 
         {% if user.id == company.user.id %} <!-- Se for a propria companhia -->
-
+            <h2>Pedidos</h2>
             {% if pedido_list %}
                 <small>Você ainda não recebeu pedidos</small>
             {% else %}

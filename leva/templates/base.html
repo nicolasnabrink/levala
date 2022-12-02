@@ -22,11 +22,12 @@
             <li>Bem vindo {{ user.username }}</li>
             <li><a href="{% url 'logout' %}">Logout</a></li>
             <li><a href="{% url 'companies:list' %}">Buscar empresas</a></li>
-            {% if user.is_client %}
-            <li><a href="{% url 'profile' user.id %}">Perfil</a></li>
-            {% else %}
-            <li><a hrefgi="{% url 'companies:detail' user.id %}">Perfil</a></li>
-            {% endif %}
+                {% if user.is_client %}
+                <li><a href="{% url 'profile' user.id %}">Perfil</a></li>
+                {% endif %}
+                {% if user.is_company %}
+                <li><a href="{% url 'companies:detail' user.id %}">Pagina da Empresa</a></li>
+                {% endif %}
             {% else %}
             <li><a href="{% url 'register' %}">Register</a></li>
             <li><a href="{% url 'login' %}">Login</a> </li>
