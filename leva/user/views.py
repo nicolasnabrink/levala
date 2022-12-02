@@ -4,9 +4,9 @@ from django.contrib import messages
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView
-from .forms import ClientSignUpForm, CompanySignUpForm, UpdateClientProfileForm, UpdateCompanyProfileForm, PedidoForm
+from .forms import ClientSignUpForm, CompanySignUpForm, UpdateClientProfileForm, UpdateCompanyProfileForm, PedidoForm, CommentForm
 from django.contrib.auth.forms import AuthenticationForm
-from .models import User, Client, Company, Pedido
+from .models import User, Client, Company, Pedido, Comment
 from django.http import HttpResponseRedirect
 
 def register(request):
@@ -92,3 +92,25 @@ def create_pedido(request, user_id):
         form = PedidoForm()
     context = {'form': form, 'company': company}
     return render(request, 'companies/pedido.html', context)
+
+def create_comment(request, companyuser_id):
+    company = get_object_or_404(Company, pk=companyuser_id)
+    user_id = request.user.id
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        form.fields["pedido"].queryset = Pedido.objects.filter(user_id=request.user, company_id=companyuser_id)
+        if form.is_valid():
+            comment_score = form.cleaned_data['score']
+            comment_review = form.cleaned_data['review']
+            comment_pedido = form.cleaned_data['pedido']
+            comment = Comment.objects.create(score=comment_score,
+                            review=comment_review,
+                            pedido=comment_pedido)
+            comment.save()
+            return HttpResponseRedirect(
+                reverse('companies:detail', args=(companyuser_id, )))
+    else:
+        form = CommentForm()
+        form.fields["pedido"].queryset = Pedido.objects.filter(user_id=request.user, company_id=companyuser_id)
+    context = {'form': form, 'company' : company,}
+    return render(request, 'companies/comment.html', context)

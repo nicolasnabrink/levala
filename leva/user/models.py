@@ -37,10 +37,16 @@ class Admin(models.Model):
         return f'{self.name}'
 
 class Pedido(models.Model):
-    user = models.OneToOneField(User, on_delete = models.CASCADE)
-    company = models.OneToOneField(Company, on_delete = models.CASCADE)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    company = models.ForeignKey(to=Company, on_delete=models.CASCADE)
     body = models.CharField(max_length=255)
     datetime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.user.username}'
+        return f'{self.datetime}'
+
+class Comment(models.Model):
+    pedido = models.OneToOneField(Pedido, on_delete = models.CASCADE, primary_key=True)
+    review = models.CharField(max_length=255)
+    datetime = models.DateTimeField(auto_now_add=True)
+    score = models.IntegerField(default=0)
