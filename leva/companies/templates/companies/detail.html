@@ -19,11 +19,32 @@
 </section>
 
 <section>
+    {% if pedidos_list %}
+        {% for comment in comments_list %}
+            {% for pedido in pedidos_list %}
+                {% if comment.pedido_id == pedido.id %}
+                    <figure>
+                        <blockquote>
+                            "{{ comment.review }}". Nota: {{ comment.score }}
+                        </blockquote>
+                        <figcaption>—{{ comment.pedido.user.username }}
+                    </figure>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+</section>
+
+<section>
     {% if user.is_authenticated%}
-        {% if user.is_client %}
+
+        {% if user.is_client %} <!-- Se for cliente -->
         <a href="{% url 'companies:create_pedido' company.user_id %}"><button>Faça seu pedido de orçamento</button></a>
+        <button><a href="{% url 'companies:create_comment' company.user.id  %}">Avalie seu pedido</a></button>
         {% endif %}
-        {% if user.id == company.user.id %}
+
+        {% if user.id == company.user.id %} <!-- Se for a propria companhia -->
+
             {% if pedido_list %}
                 <small>Você ainda não recebeu pedidos</small>
             {% else %}
@@ -31,7 +52,8 @@
                 <strong>{{ pedido.user.username }}</strong> <small>-{{ pedido.datetime }} </small>
                 <br>{{ pedido.body }} <br><br>
             {% endfor %}
-        {% endif %}
+            {% endif %}
+
         <button><a href="{% url 'companies:update_company_profile' user.id %}">Altere seu perfil</a></button>
         {% endif %}
     {% endif %}
