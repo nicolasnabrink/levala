@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.db import transaction
-from .models import User,Company,Client, Pedido
+from .models import User,Company,Client, Pedido, Comment
 
 class ClientSignUpForm(UserCreationForm):
     name = forms.CharField(required=True)
@@ -107,6 +107,17 @@ class PedidoForm(forms.ModelForm):
 
         labels = {
             'body': 'Conteudo'
+        }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('pedido','review','score',)
+
+        labels = {
+            'pedido':'Pedido',
+            'review': 'Avaliacao',
+            'score': 'Nota',
         }
         
         
