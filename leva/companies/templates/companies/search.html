@@ -1,14 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Filtro de Empresas por Nome</h2>
-<form action="{% url 'companies:search' %}">
-    <p>
-        <label for="id_query">Título:</label>
-        <input type="text" name="query" id="id_query" />
-    </p>
-    <button type="submit">Buscar</button>
-</form>
 
 
 <h2>Resultado do Filtro</h2>

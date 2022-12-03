@@ -3,8 +3,28 @@
 {% block content %}
 <h2>Todos as Empresas</h2>
 <section>
-    <p>Muitos resultados? <a href="{% url 'companies:search' %}">Filtrar Empresas</a></p>
+    <p>Muitos resultados?</p>
 </section>
+<form action="{% url 'companies:search' %}">
+    <p>
+        <input type="text" name="query_name" id="id_query" placeholder="Nome da Empresa"/>
+        <label for="city">Cidade</label>
+        <select id="id_query_city" name="query_city">
+            <option selected>Escolha...</option>
+            {% for company in company_list %}
+            <option value="{{ company.city }}">{{ company.city }}</option>
+            {% endfor %}
+        </select>
+        <label for="job">Job</label>
+        <select id="id_query_job" name="query_job">
+            <option selected>Escolha...</option>
+            {% for company in company_list %}
+            <option value="{{ company.job }}">{{ company.job }}</option>
+            {% endfor %}
+        </select>
+    </p>
+    <button type="submit">Filtre</button>
+</form>
 {% if company_list %}
 <section class="lista-de-cards">
     {% for company in company_list %}
