@@ -14,18 +14,18 @@ def detail_company(request, user_id):
 
 def list_companies(request):
     company_list = Company.objects.all()
-    context = {'company_list': company_list}
+    city_list = Company.objects.order_by('city').values('city').distinct()
+    context = {
+        'company_list': company_list,
+        'city_list': city_list,
+    }
     return render(request, 'companies/list.html', context)
 
 def is_valid_queryparam(param):
     return param != '' and param is not None
 
 def search_companies(request):
-    """context = {}
-    if request.GET.get('query', False):
-        search_term = request.GET['query'].lower()
-        company_list = Company.objects.filter(name__icontains=search_term)
-        context = {"company_list": company_list}"""
+    
     qs = Company.objects.all()
     name_query = request.GET.get('query_name')
     city_query = request.GET.get('query_city')
