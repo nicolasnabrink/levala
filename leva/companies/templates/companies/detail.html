@@ -8,19 +8,16 @@
 <h2>{{company.name}}</h2>
 
 <section class="dados-da-empresa">
-    <img src={{ company.logoURL }} width="100"> </a>
+    <img src={{ company.logoURL }} width="100"> </a> <br>
     <ul class="infos">
         <li><h3>Informations:</h3></li>
         <li>Cnpj: {{ company.cnpj }}</li>
         <li>Tel: {{ company.tel }}</li>
         <li>Job: {{ company.job }}</li>
         <li>City: {{ company.city }}</li>
-    </ul>
-</section>
-
-<section>
-    <h2>Avaliações</h2>
-    {% if pedidos_list %}
+    </ul> <br>
+    <h3>Avaliações</h3>
+    <ul>{% if pedidos_list %}
         {% for comment in comments_list %}
             {% for pedido in pedidos_list %}
                 {% if comment.pedido_id == pedido.id %}
@@ -28,12 +25,12 @@
                         <blockquote>
                             "{{ comment.review }}". Nota: {{ comment.score }}
                         </blockquote>
-                        <figcaption>—{{ comment.pedido.user.username }}
+                        <figcaption>— {{ comment.pedido.user.username }}
                     </figure>
                 {% endif %}
             {% endfor %}
         {% endfor %}
-    {% endif %}
+    {% endif %}</ul>
 </section>
 
 <section>
