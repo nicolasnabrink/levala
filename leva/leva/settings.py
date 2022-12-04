@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'landingpage.apps.LandingpageConfig',
     'user',
     'widget_tweaks',
+    'rest_framework',
+    'api.apps.ApiConfig',
+    'corsheaders',
 ]
 
 AUTH_USER_MODEL = 'user.User'
@@ -49,6 +52,7 @@ AUTH_USER_MODEL = 'user.User'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -130,4 +134,7 @@ STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static'), ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
