@@ -30,6 +30,11 @@
     {% for company in company_list %}
     <article class="card">
         <a href="{% url 'companies:detail' company.user_id %}">{{company.name}}</a>
+        {% for pedido in pedidos_list %}
+            {% if pedido == company %}
+                <p>{{ pedido.avg_score }}</p>
+            {% endif %}
+        {% endfor %}
         <p>{{ company.cnpj }} ({{ company.city }})</p>
     </article>
     {% endfor %}

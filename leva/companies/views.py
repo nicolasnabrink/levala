@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from user.models import Company, Pedido, Comment
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Avg
 
 # Create your views here
 
@@ -15,9 +16,11 @@ def detail_company(request, user_id):
 def list_companies(request):
     company_list = Company.objects.all()
     city_list = Company.objects.order_by('city').values('city').distinct()
+    pedidos_list = Company.objects.annotate(avg_score=Avg('pedido__comments__score'))
     context = {
         'company_list': company_list,
         'city_list': city_list,
+        'pedidos_list': pedidos_list,
     }
     return render(request, 'companies/list.html', context)
 
