@@ -22,6 +22,13 @@
             <option value="{{ company.job }}">{{ company.job }}</option>
             {% endfor %}
         </select>
+        <label for="score">Score</label>
+        <select id="id_query_score" name="query_score">
+            <option selected>Escolha...</option>
+            {% for pedido in pedidos_list %}
+            <option value="{{ pedido.avg_score }}">{{ pedido.avg_score }}</option>
+            {% endfor %}
+        </select>
     </p>
     <button type="submit">Filtre</button>
 </form>

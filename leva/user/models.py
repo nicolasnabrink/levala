@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.html import escape, mark_safe
 from django.contrib.auth.models import AbstractUser
+from django.db.models import Avg
 
 class User(AbstractUser):
     is_client = models.BooleanField(default=False)
