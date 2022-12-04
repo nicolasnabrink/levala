@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        {% block title %}{% endblock %}
+        {% block title %} Leva-lá {% endblock %}
     </title>
     <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
@@ -16,7 +16,8 @@
 
 <body>
     <header id="cabecalho-principal">
-        <a href="{% url 'index' %}"> <img src="{% static 'logo.png' %}" width="100"> </a>
+        <a href="{% url 'index' %}"> <img src="{% static 'levala branco.png' %}" width="100"> </a>
+        <h1>levaLá</h1>
         <nav id="navegacao-principal">
             {% if user.is_authenticated%}
             <li>Bem vindo {{ user.username }}</li>
@@ -42,7 +43,7 @@
     </main>
     <footer id="rodape-principal">
         <p>
-            <small>Copyright 2021</small>
+            <small>Copyright 2022</small>
         </p>
     </footer>
 </body>
