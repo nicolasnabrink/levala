@@ -17,10 +17,31 @@ def list_companies(request):
     context = {'company_list': company_list}
     return render(request, 'companies/list.html', context)
 
+def is_valid_queryparam(param):
+    return param != '' and param is not None
+
 def search_companies(request):
-    context = {}
+    """context = {}
     if request.GET.get('query', False):
         search_term = request.GET['query'].lower()
         company_list = Company.objects.filter(name__icontains=search_term)
-        context = {"company_list": company_list}
+        context = {"company_list": company_list}"""
+    qs = Company.objects.all()
+    name_query = request.GET.get('query_name')
+    city_query = request.GET.get('query_city')
+    job_query = request.GET.get('query_job')
+
+    if is_valid_queryparam(name_query):
+        qs = qs.filter(name__icontains=name_query)
+    
+    elif is_valid_queryparam(city_query) and city_query != 'Escolha...':
+        qs = qs.filter(city__icontains=city_query)
+
+    elif is_valid_queryparam(job_query) and job_query != 'Escolha...':
+        qs = qs.filter(job__icontains=job_query)
+
+    context = {
+        'company_list': qs
+    }
+
     return render(request, 'companies/search.html', context)
