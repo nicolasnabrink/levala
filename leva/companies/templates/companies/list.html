@@ -22,6 +22,13 @@
             <option value="{{ company.job }}">{{ company.job }}</option>
             {% endfor %}
         </select>
+        <label for="score">Score</label>
+        <select id="id_query_score" name="query_score">
+            <option selected>Escolha...</option>
+            {% for pedido in pedidos_list %}
+            <option value="{{ pedido.avg_score }}">{{ pedido.avg_score }}</option>
+            {% endfor %}
+        </select>
     </p>
     <button type="submit">Filtre</button>
 </form>
@@ -30,6 +37,11 @@
     {% for company in company_list %}
     <article class="card">
         <a href="{% url 'companies:detail' company.user_id %}">{{company.name}}</a>
+        {% for pedido in pedidos_list %}
+            {% if pedido == company %}
+                <p>{{ pedido.avg_score }}</p>
+            {% endif %}
+        {% endfor %}
         <p>{{ company.cnpj }} ({{ company.city }})</p>
     </article>
     {% endfor %}
