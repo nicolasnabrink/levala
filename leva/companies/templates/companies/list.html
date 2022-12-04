@@ -11,8 +11,8 @@
         <label for="city">Cidade</label>
         <select id="id_query_city" name="query_city">
             <option selected>Escolha...</option>
-            {% for company in company_list %}
-            <option value="{{ company.city }}">{{ company.city }}</option>
+            {% for city in city_list %}
+            <option value="{{ city.city }}">{{ city.city }}</option>
             {% endfor %}
         </select>
         <label for="job">Job</label>
