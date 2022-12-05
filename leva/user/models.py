@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.html import escape, mark_safe
 from django.contrib.auth.models import AbstractUser
+from django.db.models import Avg
 
 class User(AbstractUser):
     is_client = models.BooleanField(default=False)
@@ -37,7 +38,7 @@ class Admin(models.Model):
         return f'{self.name}'
 
 class Pedido(models.Model):
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    user = models.ForeignKey(to=User, related_name='pedidos',on_delete=models.CASCADE)
     company = models.ForeignKey(to=Company, on_delete=models.CASCADE)
     body = models.CharField(max_length=255)
     datetime = models.DateTimeField(auto_now_add=True)
@@ -46,7 +47,7 @@ class Pedido(models.Model):
         return f'{self.datetime}'
 
 class Comment(models.Model):
-    pedido = models.OneToOneField(Pedido, on_delete = models.CASCADE, primary_key=True)
+    pedido = models.OneToOneField(Pedido, related_name='comments', on_delete = models.CASCADE, primary_key=True)
     review = models.CharField(max_length=255)
     datetime = models.DateTimeField(auto_now_add=True)
     score = models.IntegerField(default=0)

@@ -4,8 +4,7 @@
 <body>
 
     <section>
-
-        <h2>Alteração de perfil</h2>
+      <h2>Alterar o perfil</h2> <br>
       <div class="card-body">
           <form action="{% url 'update_company_profile' user.id %}" method="POST" novalidate>
             {% csrf_token %}
@@ -17,11 +16,10 @@
                             <span style="color:red">{{ error }}</span>
                           {% endfor %}
                 {% endfor %}
-                    <input type="submit" value="Register" class="btn btn-block btn-primary">
+                    <input type="submit" value="Atualizar" class="btn btn-block btn-primary">
                   </div>
           </form>
         </div>
-        
     </section>
 
 </body>

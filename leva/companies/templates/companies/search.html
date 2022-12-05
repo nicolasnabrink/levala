@@ -3,12 +3,14 @@
 {% block content %}
 
 
-<h2>Resultado do Filtro</h2>
+<h2>Resultado da Busca</h2>
 {% if company_list %}
 <section class="lista-de-cards">
     {% for company in company_list %}
     <article class="card">
-        <p>{{ company.cnpj }} ({{ company.city }})</p>
+        <a href="{% url 'companies:detail' company.user_id %}">{{company.name}}</a>
+        <p>CNPJ: {{ company.cnpj }}</p>
+        <p>City: {{ company.city }}</p>
     </article>
     {% endfor %}
 </section>

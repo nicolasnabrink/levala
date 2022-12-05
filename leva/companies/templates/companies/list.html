@@ -1,36 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Todos as Empresas</h2>
+<h2>Todas as Empresas</h2> <br>
 <section>
-    <p>Muitos resultados?</p>
+    <p>Muitos resultados?</p> <br>
 </section>
 <form action="{% url 'companies:search' %}">
     <p>
         <input type="text" name="query_name" id="id_query" placeholder="Nome da Empresa"/>
-        <label for="city">Cidade</label>
         <select id="id_query_city" name="query_city">
-            <option selected>Escolha...</option>
-            {% for company in company_list %}
-            <option value="{{ company.city }}">{{ company.city }}</option>
+            <option selected>City</option>
+            {% for city in city_list %}
+            <option value="{{ city.city }}">{{ city.city }}</option>
             {% endfor %}
         </select>
-        <label for="job">Job</label>
         <select id="id_query_job" name="query_job">
-            <option selected>Escolha...</option>
+            <option selected>Job</option>
             {% for company in company_list %}
             <option value="{{ company.job }}">{{ company.job }}</option>
             {% endfor %}
         </select>
-    </p>
-    <button type="submit">Filtre</button>
+        <select id="id_query_score" name="query_score">
+            <option selected>Score</option>
+            {% for pedido in pedidos_list %}
+            <option value="{{ pedido.avg_score }}">{{ pedido.avg_score }}</option>
+            {% endfor %}
+        </select>
+    </p> <br>
+    <button type="submit">Filter</button>
 </form>
 {% if company_list %}
 <section class="lista-de-cards">
     {% for company in company_list %}
     <article class="card">
         <a href="{% url 'companies:detail' company.user_id %}">{{company.name}}</a>
-        <p>{{ company.cnpj }} ({{ company.city }})</p>
+        {% for pedido in pedidos_list %}
+            {% if pedido == company %}
+                <p>Score: {{ pedido.avg_score }}</p>
+            {% endif %}
+        {% endfor %}
+        <p>CNPJ: {{ company.cnpj }}</p>
+        <p>City: {{ company.city }}</p>
     </article>
     {% endfor %}
 </section>

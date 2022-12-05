@@ -4,24 +4,24 @@
 
 
     <section>
-                  <h2>Alteração de perfil</h2>
-                </div>
-                <div class="card-body">
-                    <form action="{% url 'update_client_profile' user.id %}" method="POST" novalidate>
-                      {% csrf_token %}
-                         {% for field in form.visible_fields %}
-                           <div class="form-group">
-                               {{ field.label_tag }}
-                                  {% render_field field class="form-control" %}
-                                    {% for error in field.errors %}
-                                      <span style="color:red">{{ error }}</span>
-                                    {% endfor %}
-                         {% endfor %}
-                             <input type="submit" value="Register" class="btn btn-block btn-primary">
-                           </div>
-                    </form>
-                 </div> 
-      </section>
+      <h2>Alterar o perfil</h2> <br>
+        </div>
+        <div class="card-body">
+            <form action="{% url 'update_client_profile' user.id %}" method="POST" novalidate>
+              {% csrf_token %}
+                {% for field in form.visible_fields %}
+                  <div class="form-group">
+                      {{ field.label_tag }}
+                          {% render_field field class="form-control" %}
+                            {% for error in field.errors %}
+                              <span style="color:red">{{ error }}</span>
+                            {% endfor %}
+                {% endfor %}
+                    <input type="submit" value="Atualizar" class="btn btn-block btn-primary">
+                  </div>
+            </form>
+        </div> 
+    </section>
 
 </body>
 {% endblock content %}
