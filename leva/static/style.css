@@ -45,7 +45,7 @@
   body {
     display: flex;
     flex-direction: column;
-    background-color:white;
+    background-color: white;
   }
   
   nav#navegacao-principal li {
