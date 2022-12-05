@@ -26,6 +26,14 @@
                             "{{ comment.review }}". Nota: {{ comment.score }}
                         </blockquote>
                         <figcaption>— {{ comment.pedido.user.username }}
+                            {% for reply in replies_list %}
+                                {% if comment.pedido_id == reply.comment_id %}
+                                <p> {{ reply.text }} - {{ company.name }} </p>
+                                {% endif %}
+                            {% endfor %}
+                                {% if user.id == company.user.id %}
+                                    <button><a href="{% url 'companies:create_reply' comment.pedido_id %}">Responda</a></button>
+                                {% endif %}
                     </figure>
                 {% endif %}
             {% endfor %}
@@ -34,10 +42,9 @@
 </section>
 
 <section>
+    <button><a href="{% url 'companies:create_pedido' company.user_id %}">Faça seu pedido de orçamento</a></button>
     {% if user.is_authenticated%}
-
         {% if user.is_client %} <!-- Se for cliente -->
-        <button><a href="{% url 'companies:create_pedido' company.user_id %}">Faça seu pedido de orçamento</a></button>
         <button><a href="{% url 'companies:create_comment' company.user.id  %}">Avalie seu pedido</a></button>
         {% endif %}
 
