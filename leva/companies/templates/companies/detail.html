@@ -37,18 +37,18 @@
     {% if user.is_authenticated%}
 
         {% if user.is_client %} <!-- Se for cliente -->
-        <a href="{% url 'companies:create_pedido' company.user_id %}"><button>Faça seu pedido de orçamento</button></a>
+        <button><a href="{% url 'companies:create_pedido' company.user_id %}">Faça seu pedido de orçamento</a></button>
         <button><a href="{% url 'companies:create_comment' company.user.id  %}">Avalie seu pedido</a></button>
         {% endif %}
 
         {% if user.id == company.user.id %} <!-- Se for a propria companhia -->
-            <h2>Pedidos</h2>
+            <br><h2>Pedidos</h2> <br>
             {% if pedido_list %}
                 <small>Você ainda não recebeu pedidos</small>
             {% else %}
             {% for pedido in pedidos_list %}
                 <strong>{{ pedido.user.username }}</strong> <small>-{{ pedido.datetime }} </small>
-                <br>{{ pedido.body }} <br><br>
+                {{ pedido.body }} <br> <br>
             {% endfor %}
             {% endif %}
 

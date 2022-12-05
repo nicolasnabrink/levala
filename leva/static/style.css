@@ -59,7 +59,7 @@
   
   main#conteiner-principal {
     margin: 0 auto;
-    width: 55%;
+    width: 51%;
     max-width: 1080px;
     padding: 1rem 1rem;
     flex-grow: 1;
@@ -129,12 +129,19 @@
   button {
     background-color: var(--tertiary-color);
     border: 2px solid var(--tertiary-color);
-    color: var(--bg-color);
+    color: white;
     border-radius: 5px;
     display: inline-block;
     font-size: medium;
     margin: 0.5rem 0;
     padding: 1rem 2rem;
+  }
+  
+  button a{
+    color:white
+  }
+  button a:hover{
+    font-weight: normal;
   }
 
   select {
