@@ -39,13 +39,13 @@ def search_companies(request):
     if is_valid_queryparam(name_query):
         qs = qs.filter(name__icontains=name_query)
     
-    elif is_valid_queryparam(city_query) and city_query != 'Escolha...':
+    if is_valid_queryparam(city_query) and city_query != 'Cidade':
         qs = qs.filter(city__icontains=city_query)
 
-    elif is_valid_queryparam(job_query) and job_query != 'Escolha...':
+    if is_valid_queryparam(job_query) and job_query != 'Serviço':
         qs = qs.filter(job__icontains=job_query)
 
-    elif is_valid_queryparam(score_query) and score_query != 'Escolha...':
+    if is_valid_queryparam(score_query) and score_query != 'Avaliação':
         qs = qs.filter(avg_score__icontains=score_query)
 
     context = {
