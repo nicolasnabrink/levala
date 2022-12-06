@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<h2> Resposta para {{ pedido.user.username }} </h2>
+<p>Avaliação: {{ comment.review }}<br>
+    Nota: {{comment.score}}
+</p>
+
+
+<form action="{% url 'companies:create_reply' pedido.id %}" method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">Responder</button>
+
+</form>
+
+
+<p><a href="{% url 'companies:detail' company.user_id %}">Voltar para a página da empresa</a></p>
+
+{% endblock content %}

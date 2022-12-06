@@ -51,3 +51,8 @@ class Comment(models.Model):
     review = models.CharField(max_length=255)
     datetime = models.DateTimeField(auto_now_add=True)
     score = models.IntegerField(default=0)
+
+class Reply(models.Model):
+    comment = models.OneToOneField(Comment, related_name='comments', on_delete = models.CASCADE, primary_key=True)
+    text = models.CharField(max_length=255)
+    datetime = models.DateTimeField(auto_now_add=True)
