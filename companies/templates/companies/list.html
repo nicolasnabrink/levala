@@ -16,15 +16,23 @@
         </select>
         <select id="id_query_job" name="query_job">
             <option selected>Serviço</option>
-            {% for company in company_list %}
-            <option value="{{ company.job }}">{{ company.job }}</option>
+            {% for job in job_list %}
+            <option value="{{ job.job }}">{{ job.job }}</option>
             {% endfor %}
         </select>
         <select id="id_query_score" name="query_score">
             <option selected>Avaliação</option>
-            {% for pedido in pedidos_list %}
-            <option value="{{ pedido.avg_score }}">{{ pedido.avg_score }}</option>
-            {% endfor %}
+            <option value="0.0">0</option>
+            <option value="1.0">1</option>
+            <option value="2.0">2</option>
+            <option value="3.0">3</option>
+            <option value="4.0">4</option>
+            <option value="5.0">5</option>
+            <option value="6.0">6</option>
+            <option value="7.0">7</option>
+            <option value="8.0">8</option>
+            <option value="9.0">9</option>
+            <option value="10.0">10</option>
         </select>
     </p> <br>
     <button type="submit">Filtrar</button>
@@ -34,11 +42,7 @@
     {% for company in company_list %}
     <article class="card">
         <a href="{% url 'companies:detail' company.user_id %}">{{company.name}}</a>
-        {% for pedido in pedidos_list %}
-            {% if pedido == company %}
-                <p>Avaliação: {{ pedido.avg_score }}</p>
-            {% endif %}
-        {% endfor %}
+        <p>Avaliação: {{ company.avg_score }}</p>
         <p>CNPJ: {{ company.cnpj }}</p>
         <p>Cidade Sede: {{ company.city }}</p>
         <p>Serviço: {{ company.job }}</p>

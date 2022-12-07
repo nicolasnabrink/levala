@@ -3,6 +3,12 @@ from django import forms
 from django.db import transaction
 from .models import User,Company,Client, Pedido, Comment, Reply
 
+JOBS = [
+    ('Municipal', 'Municipal'),
+    ('Estadual', 'Estadual'),
+    ('Nacional', 'Nacional'),
+]
+
 class ClientSignUpForm(UserCreationForm):
     name = forms.CharField(required=True)
     cpf = forms.CharField(required=True)
@@ -30,7 +36,7 @@ class CompanySignUpForm(UserCreationForm):
     logoURL = forms.CharField(required=True)
     cnpj = forms.CharField(required=True)
     tel = forms.CharField(required=True)
-    job = forms.CharField(required=True)
+    job = forms.ChoiceField(required=True, choices=JOBS)
     city = forms.CharField(required=True)
 
     class Meta(UserCreationForm.Meta):
@@ -79,7 +85,7 @@ class UpdateCompanyProfileForm(forms.ModelForm):
     logoURL = forms.CharField(required=True)
     cnpj = forms.CharField(required=True)
     tel = forms.CharField(required=True)
-    job = forms.CharField(required=True)
+    job = forms.ChoiceField(required=True, choices=JOBS)
     city = forms.CharField(required=True)
 
     class Meta(UserCreationForm.Meta):

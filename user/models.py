@@ -2,6 +2,13 @@ from django.db import models
 from django.utils.html import escape, mark_safe
 from django.contrib.auth.models import AbstractUser
 from django.db.models import Avg
+from django.core.validators import MaxValueValidator, MinValueValidator
+
+JOBS = [
+    ('Municipal', 'Municipal'),
+    ('Estadual', 'Estadual'),
+    ('Nacional', 'Nacional'),
+]
 
 class User(AbstractUser):
     is_client = models.BooleanField(default=False)
@@ -24,7 +31,7 @@ class Company(models.Model):
     logoURL = models.URLField(max_length=300, null=True, blank=True)
     cnpj = models.IntegerField(default=0)
     tel = models.IntegerField(default=0)
-    job = models.CharField(max_length=255, default='Municipal')
+    job = models.CharField(max_length=255, default='Municipal', choices=JOBS)
     city = models.CharField(max_length=255)
 
     def __str__(self):
@@ -50,7 +57,10 @@ class Comment(models.Model):
     pedido = models.OneToOneField(Pedido, related_name='comments', on_delete = models.CASCADE, primary_key=True)
     review = models.CharField(max_length=255)
     datetime = models.DateTimeField(auto_now_add=True)
-    score = models.IntegerField(default=0)
+    score = models.IntegerField(default=0, validators=[
+            MaxValueValidator(10),
+            MinValueValidator(0)
+        ])
 
 class Reply(models.Model):
     comment = models.OneToOneField(Comment, related_name='comments', on_delete = models.CASCADE, primary_key=True)

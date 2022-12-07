@@ -15,13 +15,13 @@ def detail_company(request, user_id):
     return render(request, 'companies/detail.html', context)
 
 def list_companies(request):
-    company_list = Company.objects.all()
     city_list = Company.objects.order_by('city').values('city').distinct()
-    pedidos_list = Company.objects.annotate(avg_score=Avg('pedido__comments__score'))
+    job_list = Company.objects.order_by('job').values('job').distinct()
+    company_list = Company.objects.annotate(avg_score=Avg('pedido__comments__score'))
     context = {
         'company_list': company_list,
+        'job_list': job_list,
         'city_list': city_list,
-        'pedidos_list': pedidos_list,
     }
     return render(request, 'companies/list.html', context)
 
@@ -31,7 +31,6 @@ def is_valid_queryparam(param):
 def search_companies(request):
     
     qs = Company.objects.annotate(avg_score=Avg('pedido__comments__score'))
-    pedidos_list = Company.objects.annotate(avg_score=Avg('pedido__comments__score'))
     name_query = request.GET.get('query_name')
     city_query = request.GET.get('query_city')
     job_query = request.GET.get('query_job')
@@ -47,7 +46,7 @@ def search_companies(request):
         qs = qs.filter(job__icontains=job_query)
 
     if is_valid_queryparam(score_query) and score_query != 'Avaliação':
-        qs = qs.filter(avg_score__icontains=score_query)
+        qs = qs.filter(avg_score__gte=score_query)
 
     context = {
         'company_list': qs

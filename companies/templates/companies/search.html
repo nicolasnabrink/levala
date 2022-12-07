@@ -9,6 +9,7 @@
     {% for company in company_list %}
     <article class="card">
         <a href="{% url 'companies:detail' company.user_id %}">{{company.name}}</a>
+        <p>Avaliação: {{ company.avg_score }}</p>
         <p>CNPJ: {{ company.cnpj }}</p>
         <p>Cidade: {{ company.city }}</p>
     </article>
