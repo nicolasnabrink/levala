@@ -59,8 +59,8 @@
   
   main#conteiner-principal {
     margin: 0 auto;
-    width: 51%;
-    max-width: 1080px;
+    width: 100%;
+    max-width: 680px;
     padding: 1rem 1rem;
     flex-grow: 1;
     display: grid;
@@ -69,6 +69,7 @@
     border-radius: 10px;
     background-color: white;
   }
+
   
   footer#rodape-principal {
     display: flex;
@@ -77,6 +78,10 @@
     align-items: center;
     padding: 1rem 1rem;
     background-color: white;
+  }
+
+  .text {
+    padding: 1rem 6rem;
   }
   
   .lista-de-cards {
@@ -143,7 +148,7 @@
   button a:hover{
     font-weight: normal;
   }
-
+  
   select {
     background-color: var(--tertiary-color);
     border: 2px solid var(--tertiary-color);
@@ -155,13 +160,13 @@
     margin: 0.5rem 0;
     padding: 1rem 2rem;
   }
-
+  
   section {
     display: grid;
     place-items: center;
     list-style-type: none;
   }
-
+  
   .dados-da-empresa{
     background-color: var(--tertiary-color);
     border: 2px solid var(--tertiary-color);
@@ -174,22 +179,22 @@
     margin: 0.5rem 0;
     padding: 1rem 2rem;
   }
-
+  
   .dados-da-empresa img {
     width: 30%;
     aspect-ratio: 3/2;
     object-fit: contain;
   }
-
+  
   h3 {
     color: white;
     font-weight: normal;
   }
-
+  
   li:has(h3) {
     list-style-type: none;
   }
-
+  
   .btn-block{
     background-color: var(--tertiary-color);
     border: 2px solid var(--tertiary-color);
@@ -206,9 +211,10 @@
     background-color: var(--terciary-color-light);
     border: 2px solid var(--tertiary-color);
   }
-
+  
   a:hover {
     font-weight: bold;
   }
-
+  
+  
   

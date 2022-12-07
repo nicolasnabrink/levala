@@ -2,10 +2,9 @@
 
 
 {% block content %}
-<section>
 
 <h2>Pedido de Orçamento para {{ company.name }} </h2> 
-    <p> Escreve uma mensagem especificando a data de mudança e endereços de saída e chegada. Não se esqueça de deixar seu contato!</p>
+<p class="text"> Escreva uma mensagem especificando a data de mudança e endereços de saída e chegada. Não se esqueça de deixar seu contato!</p>
     
     
     <form action="{% url 'companies:create_pedido' company.user_id %}" method="post">
@@ -20,6 +19,5 @@
     
     
     <p><a href="{% url 'companies:detail' company.user_id %}">Voltar para a página da empresa</a></p>
-    
-</section>
+
 {% endblock content %}
